@@ -38,6 +38,21 @@ astronauts %>%
        title = "Median of Missions per Year") +
   theme(legend.position = "none")
   theme_bw()
+  ggsave("img/nation-year.png")
+
+```
+
+```{r}
+austronauts %>% 
+  ggplot(aes(x=year_of_mission,hours_mission, color=sex))+
+  geom_point()+
+  scale_y_log10()+
+  labs(title = "Astronauts Demographics between 1958 to 2018",
+                  subtitle = "Comparison of Hours/Year per Gender",
+                  caption = "Data source = Astronauts Cleaned data by Rolando Acosta",
+                  x = "Year of Mission", y = " Hours per Mission")
+
+ggsave("img/yrs-hrs-log10.png")
 ```
 
 ```{r}
@@ -55,9 +70,65 @@ bxp <- bxp + facet_wrap(~ military_civilian) +
 
 
 bxp
+
+ggsave("img/gender-year.png")
 ```
 
 ```{r}
+ filter(austronauts, nationality==c("U.S.S.R/Russia","U.S.")) %>%
+  ggplot(aes(nationality,mission_number, fill = sex)) + 
+  geom_col(width = .4) +
+  labs(title = "Astronauts Demographics (Russia & U.S.)",
+                  subtitle = "Comparison of Nationality per Mission Amount",
+                  caption = "Data source = Astronauts Cleaned data by Rolando Acosta",
+                  x = "Sex of Astronauts", y = " Year of Mission")
 
+  ggsave("img/nation-mission_amt.png")
+```
+
+
+```{r}
+bxp_h <- ggplot(data=astronauts, mapping = aes(x = sex, y = hours_mission)) + 
+  geom_boxplot(aes(color = sex)) +
+  theme_bw()
+
+bxp_h <- bxp_h + labs(title = "Astronauts Demographics",
+                  subtitle = "Comparison of Sex in astronauts for hours/missions",
+                  caption = "Data source = Astronauts Cleaned data by Rolando Acosta",
+                  x = "Sex of Astronauts", y = " Hours of Mission")
+
+bxp_h <- bxp_h + facet_wrap(~ military_civilian) +
+      geom_jitter(alpha = 0.3,width = 0.20, color = "black")
+
+bxp_h
+
+ggsave("img/gender-hours.png")
+
+
+```
+
+```{r}
+countries <- 
+  austronauts %>% 
+  count(nationality, sort=TRUE) %>%
+  head(6) %>%
+  pull(nationality)
+
+
+astronauts %>%
+  filter(nationality %in% countries) %>%
+  ggplot(aes(x=year_of_mission,y=nationality, fill=military_civilian)) +
+  geom_density_ridges()+
+  theme(legend.position = "bottom")+
+  facet_wrap(~sex) +
+  labs(title = "Astronauts Demographics (Top 500 astronauts)",
+                  subtitle = "Comparison of the gender of astronauts by nation",
+                  caption = "Data source: Astronauts Cleaned data by Rolando Acosta",
+                  x = "Years (1958-2018)", y = "Nation", colour=FALSE)
+  
+ggsave("img/gender-nation.png")
+
+ 
+  
 ```
 

@@ -34,10 +34,11 @@ Demographics of Astronauts for Inter-DS-Institute
       <a href="#about-the-project">Abstract</a>
       <ul>
         <li><a href="#built-with">Built With</a></li>
+        <li><a href="#powerpoint-presentation">PowerPoint Presentation</a></li>
       </ul>
     </li>
-    <li><a href="#R-Markdown">R Markdown</a></li>
-    <li><a href="#Team-Members">Team Members</a></li>
+    <li><a href="#r-markdown">R Markdown</a></li>
+    <li><a href="#team-members">Team Members</a></li>
     <li><a href="#contact">Contact</a></li>
   </ol>
 </details>
@@ -53,6 +54,9 @@ This exploratory research is the final product of the hands-on workshops offered
 * [RStudio](https://docs.anaconda.com/anaconda/navigator/tutorials/create-r-environment/)
 * [Astronauts DataSet](https://github.com/bySharkster/Astronauts-Demographics/blob/master/austronauts.csv)
 
+### PowerPoint Presentation
+Go to the link to download the presentation
+[Download The File](https://github.com/bySharkster/Astronauts-Demographics/blob/master/Astronauts.pptx)
 <!-- USAGE -->
 ## R Markdown 
 The Code of the entire analysis here -->> [code](https://github.com/bySharkster/Astronauts-Demographics/blob/master/demographics.Rmd)

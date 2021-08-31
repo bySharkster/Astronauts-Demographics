@@ -1,0 +1,63 @@
+---
+title: "astrornauts"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(dplyr)
+library(tidyverse)
+library(ggplot2)
+library(dslabs)
+library(ggridges)
+
+theme_set(theme_bw(16))
+astronauts <- tbl_df(austronauts)
+ds_theme_set()
+astronauts %>% as_tibble()
+```
+
+```{r astronauts}
+summary(astronauts)
+```
+
+
+```{r year_of_selection, echo=FALSE}
+glimpse(astronauts)
+```
+
+
+```{r}
+astronauts %>%
+  drop_na() %>%
+  mutate(nationality = fct_reorder(nationality,total_number_of_missions, .fun='median')) %>%
+  ggplot(aes(year_of_mission,nationality, fill= nationality)) +
+  geom_boxplot() +
+  labs(y="Nationality", 
+       x="Year of Mision",
+       title = "Median of Missions per Year") +
+  theme(legend.position = "none")
+  theme_bw()
+```
+
+```{r}
+bxp <- ggplot(data=astronauts, mapping = aes(x = sex, y = year_of_mission)) + 
+  geom_boxplot(aes(color = sex)) +
+  theme_bw()
+
+bxp <- bxp + labs(title = "Astronauts Demographics between 1958 to 2018",
+                  subtitle = "Comparison of Sex in astronauts missions",
+                  caption = "Data source = Astronauts Cleaned data by Rolando Acosta",
+                  x = "Sex of Astronauts", y = " Year of Mission")
+
+bxp <- bxp + facet_wrap(~ military_civilian) +
+      geom_jitter(alpha = 0.3,width = 0.20, color = "black")
+
+
+bxp
+```
+
+```{r}
+
+```
+
